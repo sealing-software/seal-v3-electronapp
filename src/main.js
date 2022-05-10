@@ -6,6 +6,8 @@
 import path from "path";
 import url from "url";
 import { app, Menu, ipcMain, shell } from "electron";
+
+//App menu templates show in top window menu
 import appMenuTemplate from "./menu/app_menu_template";
 import editMenuTemplate from "./menu/edit_menu_template";
 import devMenuTemplate from "./menu/dev_menu_template";
@@ -39,6 +41,9 @@ const initIpc = () => {
   ipcMain.on("open-external-link", (event, href) => {
     shell.openExternal(href);
   });
+  ipcMain.on("get-reg-value", (event, href) => {
+    console.log("TEST");
+  });
 };
 
 app.on("ready", () => {
@@ -55,19 +60,20 @@ app.on("ready", () => {
       nodeIntegration: true,
       contextIsolation: false,
       // Spectron needs access to remote module
-      enableRemoteModule: env.name === "test"
-    }
+      enableRemoteModule: env.name === "test",
+    },
   });
 
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, "app.html"),
       protocol: "file:",
-      slashes: true
+      slashes: true,
     })
   );
 
   if (env.name === "development") {
+    //Opens dev tools upon load within dev env
     mainWindow.openDevTools();
   }
 });
