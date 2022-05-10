@@ -1,12 +1,11 @@
 {
   "name": "seal",
   "productName": "SEAL",
-  "description": "Application for automated software extractiona nd audit logging of Windows machines.",
+  "description": "Application for automated software extraction and audit logging of Windows machines.",
   "version": "0.0.0",
   "private": true,
   "author": "Arthur Gartner - Arthur.Gartner@gmail.cpom",
-  "copyright": "© 2017, Gumby inc.",
-  "homepage": "http://example.com",
+  "homepage": "http://sealingsoftware.com",
   "main": "app/main.js",
   "build": {
     "appId": "com.sealingsoftware.seal",
@@ -31,7 +30,9 @@
     "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
   },
   "dependencies": {
-    "fs-jetpack": "^4.1.0"
+    "fs-jetpack": "^4.1.0",
+    "regedit": "^5.1.1",
+    "windows": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -42,6 +43,7 @@
     "electron": "^13.0.1",
     "electron-builder": "^22.5.1",
     "electron-mocha": "^10.0.0",
+    "file-loader": "^6.2.0",
     "mocha": "^8.3.2",
     "source-map-support": "^0.5.6",
     "spectron": "^15.0.0",
