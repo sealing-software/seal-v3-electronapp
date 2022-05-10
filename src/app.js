@@ -32,11 +32,15 @@ document.querySelector("#regLoad").addEventListener(
   false
 );
 
-var regedit = require("regedit");
+var regKey = "HKLM\\software\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
 
-regedit.list(
-  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
-  function (err, result) {
-    console.log(result);
-  }
-);
+const regedit = require("regedit").promisified;
+regedit.list(regKey).then((response) => {
+  let appList = response[regKey].keys;
+  appList.forEach((appName) => {
+    let appKey = regKey + "\\" + appName;
+    regedit.list(appKey).then((response) => {
+      console.log(response[appKey].values.DisplayName.value);
+    });
+  });
+});

@@ -41,7 +41,7 @@ const initIpc = () => {
   ipcMain.on("open-external-link", (event, href) => {
     shell.openExternal(href);
   });
-  ipcMain.on("test", (event, href) => {
+  ipcMain.on("get-reg-value", (event, href) => {
     console.log("TEST");
   });
 };
@@ -74,7 +74,7 @@ app.on("ready", () => {
 
   if (env.name === "development") {
     //Opens dev tools upon load within dev env
-    //mainWindow.openDevTools();
+    mainWindow.openDevTools();
   }
 });
 

@@ -4,7 +4,7 @@
   "description": "Application for automated software extraction and audit logging of Windows machines.",
   "version": "0.0.0",
   "private": true,
-  "author": "Arthur Gartner - Arthur.Gartner@gmail.cpom",
+  "author": "Arthur Gartner - Arthur.Gartner@gmail.com",
   "homepage": "http://sealingsoftware.com",
   "main": "app/main.js",
   "build": {
