@@ -1,56 +1,52 @@
 {
   "name": "seal",
-  "productName": "SEAL",
-  "description": "Application for automated software extraction and audit logging of Windows machines.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "author": "Arthur Gartner - Arthur.Gartner@gmail.com",
-  "homepage": "http://sealingsoftware.com",
-  "main": "app/main.js",
-  "build": {
-    "appId": "com.sealingsoftware.seal",
-    "files": [
-      "app/**/*",
-      "node_modules/**/*",
-      "package.json"
-    ],
-    "directories": {
-      "buildResources": "resources"
-    },
-    "publish": null
-  },
   "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
-    "preunit": "webpack --config=build/webpack.unit.config.js --env=test",
-    "unit": "electron-mocha temp/specs.js --renderer --color --require source-map-support/register",
-    "pree2e": "webpack --config=build/webpack.app.config.js --env=test && webpack --config=build/webpack.e2e.config.js --env=test",
-    "e2e": "mocha temp/e2e.js --require source-map-support/register",
-    "test": "npm run unit && npm run e2e",
-    "start": "node build/start.js",
-    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
+    "postuninstall": "electron-builder install-app-deps"
   },
+  "main": "background.js",
   "dependencies": {
-    "fs-jetpack": "^4.1.0",
-    "regedit": "^5.1.1",
-    "windows": "^0.1.0"
+    "core-js": "^3.8.3",
+    "electron": "^18.2.3",
+    "vue": "^3.2.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-loader": "^8.2.2",
-    "chai": "^4.1.0",
-    "css-loader": "^5.2.0",
-    "electron": "^13.0.1",
-    "electron-builder": "^22.5.1",
-    "electron-mocha": "^10.0.0",
-    "file-loader": "^6.2.0",
-    "mocha": "^8.3.2",
-    "source-map-support": "^0.5.6",
-    "spectron": "^15.0.0",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0",
-    "webpack-merge": "^5.7.3",
-    "webpack-node-externals": "^3.0.0"
-  }
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }
