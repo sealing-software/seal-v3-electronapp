@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="button" @mouseenter="expandButton">
+    <div class="button" @mouseenter="expandButton" @mouseleave="closeButton">
       <div class="content">
         <!-- implicit style (fas is assumed) -->
         <div class="icon">
@@ -20,11 +20,16 @@ export default {
   methods: {
     expandButton() {
       var contentArea = this.$el.querySelector(".content");
+      var button = this.$el.querySelector(".button");
 
-      //Get the width of the button which includes the icon and text
       var contentWidth = contentArea.offsetWidth;
 
-      console.log(contentWidth);
+      button.style.width = contentWidth + "px";
+    },
+    closeButton() {
+      var button = this.$el.querySelector(".button");
+
+      button.style.width = "50px";
     },
   },
 };
