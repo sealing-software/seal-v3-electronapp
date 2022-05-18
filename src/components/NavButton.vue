@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="button">
+    <div class="button" @mouseenter="expandButton">
       <div class="content">
         <!-- implicit style (fas is assumed) -->
         <div class="icon">
@@ -16,6 +16,16 @@ export default {
   name: "nav-btn",
   props: {
     navBtn: Object,
+  },
+  methods: {
+    expandButton() {
+      var contentArea = this.$el.querySelector(".content");
+
+      //Get the width of the button which includes the icon and text
+      var contentWidth = contentArea.offsetWidth;
+
+      console.log(contentWidth);
+    },
   },
 };
 </script>
