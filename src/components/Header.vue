@@ -16,5 +16,10 @@ export default {
 }
 img {
   width: 50px;
+  margin: 0px 5px;
+}
+
+h1 {
+  margin-left: 10px;
 }
 </style>

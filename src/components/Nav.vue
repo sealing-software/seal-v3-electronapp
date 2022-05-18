@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <div :key="pageName" v-for="pageName in pageNames">
-      <NavButton :name="pageName" />
+    <div :key="navBtn.name" v-for="navBtn in navBtns">
+      <NavButton :navBtn="navBtn" />
     </div>
   </nav>
 </template>
@@ -10,7 +10,7 @@ import NavButton from "./NavButton";
 export default {
   name: "nav-menu",
   props: {
-    pageNames: Array,
+    navBtns: Array,
   },
   components: {
     NavButton,
@@ -21,7 +21,7 @@ export default {
 nav {
   display: flex;
   flex-direction: column;
-  width: 50px;
+  width: 60px;
   height: 100%;
   justify-content: center;
   align-content: center;

@@ -1,9 +1,12 @@
 <template>
   <div class="container">
     <div class="button">
-      <div class="icon">
+      <div class="content">
         <!-- implicit style (fas is assumed) -->
-        <font-awesome-icon icon="phone" />
+        <div class="icon">
+          <font-awesome-icon :icon="navBtn.icon" />
+        </div>
+        <div class="btn-name">{{ navBtn.name }}</div>
       </div>
     </div>
   </div>
@@ -12,28 +15,55 @@
 export default {
   name: "nav-btn",
   props: {
-    name: String,
+    navBtn: Object,
   },
 };
 </script>
-<style>
+<style lang="scss">
 .container {
-  height: 40px;
-  width: 40px;
-  margin: 20px 10px;
-}
+  position: relative;
+  margin: 20px 0px;
+  margin-left: 5px;
 
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgb(49, 200, 200);
-  border-radius: 50%;
-  height: 100%;
-}
+  .button {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    //justify-content: center;
+    background: #31c8c8;
+    border-radius: 30px;
+    border: 2px solid #31c8c8;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    transition: width 0.1s ease-out 0s;
+    overflow: hidden;
 
-.icon {
-  font-size: 20px;
-  color: white;
+    &:hover {
+      background: white;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+      width: 150px;
+
+      .content {
+        color: #31c8c8;
+      }
+    }
+
+    .content {
+      display: flex;
+      font-size: 25px;
+      color: white;
+      text-align: center;
+      font-weight: 600;
+
+      .icon {
+        width: 50px;
+      }
+
+      .btn-name {
+        padding-right: 20px;
+      }
+    }
+  }
 }
 </style>

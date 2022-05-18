@@ -2,7 +2,7 @@
   <div class="app-view">
     <Header />
     <div class="content">
-      <Nav :pageNames="pageNames" />
+      <Nav :navBtns="navBtns" />
       <div class="page-view">
         <Home />
       </div>
@@ -24,16 +24,43 @@ export default {
   },
   data() {
     return {
-      pageNames: ["Home", "View", "Capture", "Check", "Settings"],
+      navBtns: [
+        {
+          name: "Home",
+          icon: "home",
+        },
+        {
+          name: "View",
+          icon: "eye",
+        },
+        {
+          name: "Capture",
+          icon: "camera",
+        },
+        {
+          name: "Check",
+          icon: "check",
+        },
+        {
+          name: "Settings",
+          icon: "gear",
+        },
+      ],
     };
   },
 };
 </script>
 
 <style>
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"), url(./fonts/Inter/Inter.ttf) format("truetype");
+}
+
 * {
   padding: 0;
   margin: 0;
+  font-family: "Inter";
 }
 
 #app {
