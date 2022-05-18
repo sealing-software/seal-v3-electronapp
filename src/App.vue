@@ -2,7 +2,7 @@
   <div class="app-view">
     <Header />
     <div class="content">
-      <Nav />
+      <Nav :pageNames="pageNames" />
       <div class="page-view">
         <Home />
       </div>
@@ -21,6 +21,11 @@ export default {
     Home,
     Nav,
     Header,
+  },
+  data() {
+    return {
+      pageNames: ["Home", "View", "Capture", "Check", "Settings"],
+    };
   },
 };
 </script>

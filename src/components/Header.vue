@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <img src="logo.svg" />
-    <h1>SEAL</h1>
+    <h1>Software Extractor and Audit Logger</h1>
   </div>
 </template>
 <script>
