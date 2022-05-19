@@ -1,9 +1,9 @@
 <template>
-  <div class="card">Home</div>
+  <div class="card">Settings</div>
 </template>
 <script>
 export default {
-  name: "home-view",
+  name: "settings-view",
   components: {},
 };
 </script>

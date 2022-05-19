@@ -1,7 +1,11 @@
 <template>
   <nav>
     <div :key="navBtn.name" v-for="navBtn in navBtns">
-      <NavButton :navBtn="navBtn" />
+      <NavButton
+        :navBtn="navBtn"
+        :currentPage="currentPage"
+        @page-change="$emit('page-change', navBtn.name)"
+      />
     </div>
   </nav>
 </template>
@@ -11,6 +15,7 @@ export default {
   name: "nav-menu",
   props: {
     navBtns: Array,
+    currentPage: String,
   },
   components: {
     NavButton,

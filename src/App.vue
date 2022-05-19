@@ -2,8 +2,13 @@
   <div class="app-view">
     <Header />
     <div class="content">
-      <Nav :navBtns="navBtns" />
+      <Nav
+        :navBtns="navBtns"
+        :currentPage="currentPage"
+        @page-change="changePage"
+      />
       <div class="page-view">
+        <router-view></router-view>
         <Home />
       </div>
     </div>
@@ -46,7 +51,13 @@ export default {
           icon: "gear",
         },
       ],
+      currentPage: "Home",
     };
+  },
+  methods: {
+    changePage(pageName) {
+      this.currentPage = pageName;
+    },
   },
 };
 </script>
@@ -80,5 +91,11 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.page-view {
+  flex-grow: 1;
+  padding: 10px;
+  padding-left: 10px;
 }
 </style>

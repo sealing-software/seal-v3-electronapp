@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <div class="button" @mouseenter="expandButton" @mouseleave="closeButton">
+    <div
+      :class="[navBtn.name == currentPage ? 'selected' : '', 'button']"
+      @mouseenter="expandButton"
+      @mouseleave="closeButton"
+      @click="$emit('page-change', navBtn.name)"
+    >
       <div class="content">
         <!-- implicit style (fas is assumed) -->
         <div class="icon">
@@ -16,6 +21,7 @@ export default {
   name: "nav-btn",
   props: {
     navBtn: Object,
+    currentPage: String,
   },
   methods: {
     expandButton() {
@@ -57,7 +63,6 @@ export default {
     &:hover {
       background: white;
       box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
-      width: 150px;
 
       .content {
         color: #31c8c8;
@@ -78,6 +83,15 @@ export default {
       .btn-name {
         padding-right: 20px;
       }
+    }
+  }
+
+  .selected {
+    background: white;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+
+    .content {
+      color: #31c8c8;
     }
   }
 }
