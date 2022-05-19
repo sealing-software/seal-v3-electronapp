@@ -30,5 +30,6 @@ nav {
   height: 100%;
   justify-content: center;
   align-content: center;
+  z-index: 9;
 }
 </style>

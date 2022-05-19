@@ -1,7 +1,12 @@
 <template>
-  <div class="header">
-    <img src="logo.svg" />
-    <h1>Software Extractor and Audit Logger</h1>
+  <div class="header-container">
+    <div class="header">
+      <img src="logo.svg" />
+      <h1>Software Extractor and Audit Logger</h1>
+    </div>
+    <div class="connect-status">
+      <font-awesome-icon icon="cloud" />
+    </div>
   </div>
 </template>
 <script>
@@ -21,5 +26,17 @@ img {
 
 h1 {
   margin-left: 10px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.connect-status {
+  color: #ff3a30;
+  font-size: 1.5em;
+  margin: auto 0;
+  margin-right: 10px;
 }
 </style>

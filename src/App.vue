@@ -96,6 +96,5 @@ body {
 .page-view {
   flex-grow: 1;
   padding: 10px;
-  padding-left: 10px;
 }
 </style>

@@ -24,6 +24,7 @@ export default {
     currentPage: String,
   },
   methods: {
+    //Expand the button based on width of content tis is required for smooth transition
     expandButton() {
       var contentArea = this.$el.querySelector(".content");
       var button = this.$el.querySelector(".button");
@@ -52,9 +53,9 @@ export default {
     align-items: center;
     margin: auto;
     //justify-content: center;
-    background: #31c8c8;
+    background: #017cff;
     border-radius: 30px;
-    border: 2px solid #31c8c8;
+    border: 2px solid #017cff;
     height: 50px;
     width: 50px;
     cursor: pointer;
@@ -66,7 +67,7 @@ export default {
       box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 
       .content {
-        color: #31c8c8;
+        color: #017cff;
       }
     }
 
@@ -92,7 +93,7 @@ export default {
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 
     .content {
-      color: #31c8c8;
+      color: #017cff;
     }
   }
 }

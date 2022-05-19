@@ -19,6 +19,7 @@
     "core-js": "^3.8.3",
     "electron": "^18.2.3",
     "vue": "^3.2.13",
+    "vue-mq": "^1.0.1",
     "vue-router": "^4.0.15"
   },
   "devDependencies": {

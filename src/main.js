@@ -5,6 +5,7 @@ import {
   faCamera,
   faCheck,
   faGear,
+  faCloud,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import router from "./router";
@@ -16,6 +17,8 @@ library.add(faEye);
 library.add(faCamera);
 library.add(faCheck);
 library.add(faGear);
+library.add(faCloud);
+library.add(faCheck);
 
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)
