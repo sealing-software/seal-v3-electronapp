@@ -1,5 +1,7 @@
 <template>
-  <div class="card">Home</div>
+  <div class="card">
+    <router-link to="/settings">Go to settings</router-link>
+  </div>
 </template>
 <script>
 export default {

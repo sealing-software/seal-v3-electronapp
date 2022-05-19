@@ -1,5 +1,5 @@
 <template>
-  <div class="card">Settings</div>
+  <div class="card">Settings Page</div>
 </template>
 <script>
 export default {

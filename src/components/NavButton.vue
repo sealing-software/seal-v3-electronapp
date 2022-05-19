@@ -45,6 +45,7 @@ export default {
   position: relative;
   margin: 20px 0px;
   margin-left: 5px;
+  z-index: 10;
 
   .button {
     display: flex;

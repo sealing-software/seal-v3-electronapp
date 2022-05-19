@@ -9,7 +9,6 @@
       />
       <div class="page-view">
         <router-view></router-view>
-        <Home />
       </div>
     </div>
   </div>
@@ -17,13 +16,11 @@
 
 <script>
 import Header from "./components/Header.vue";
-import Home from "./components/Home";
 import Nav from "./components/Nav";
 
 export default {
   name: "App",
   components: {
-    Home,
     Nav,
     Header,
   },
@@ -57,6 +54,9 @@ export default {
   methods: {
     changePage(pageName) {
       this.currentPage = pageName;
+      pageName == "Home"
+        ? this.$router.push("/")
+        : this.$router.push("/" + pageName);
     },
   },
 };
