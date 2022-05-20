@@ -1,9 +1,12 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import electron, { remote } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
+import jetpack from "fs-jetpack";
 const isDevelopment = process.env.NODE_ENV !== "production";
+const { app, BrowserWindow, protocol, ipcMain } = electron;
+const path = require("path");
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -20,13 +23,16 @@ async function createWindow() {
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      enableRemoteModule: true,
+      preload: __dirname + "\\preload.js", //path.join(__dirname, "preload.js"),
     },
   });
 
   //Disable the window menu
   win.setMenu(null);
 
-  console.log(__dirname);
+  //console.log(__dirname + "\\preload.js");
+  //console.log(__dirname);
 
   //win.setIcon(path.join(__dirname, "/src/assets/logo.svg"));
 
@@ -85,3 +91,31 @@ if (isDevelopment) {
     });
   }
 }
+
+//Main conduct registry read when requested
+ipcMain.on("req-reg", (e, item) => {
+  var vbsDirectory;
+  //Lazy implementation, need to investigate further on proper folder copy for serve and build
+  if (isDevelopment) {
+    jetpack.copy("./node_modules/regedit/vbs", app.getAppPath() + "/vbs", {
+      overwrite: true,
+    });
+    vbsDirectory = path.join(app.getAppPath(), "vbs");
+  } else {
+    vbsDirectory = path.join(
+      process.resourcesPath,
+      "app/myfolder/subfolder/myscripts/myscript1.sh"
+    );
+  }
+
+  const regedit = require("regedit");
+
+  regedit.setExternalVBSLocation(vbsDirectory);
+
+  regedit.list(
+    ["HKCU\\SOFTWARE", "HKLM\\SOFTWARE", "HKCU\\IM_FAKE_THEREFOR_I_DONT_EXIST"],
+    function (err, result) {
+      console.log(result);
+    }
+  );
+});

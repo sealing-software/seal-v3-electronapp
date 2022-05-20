@@ -2,24 +2,27 @@
   <div class="page-container">
     <div class="card">
       <div class="card-content">
-        <PageHeader pageName="Home" />
-        <Button type="text" text="Submit" icon="check" />
+        <PageHeader pageName="Capture" />
+        <Button type="text" text="Start Capture" ipcChannel="req-reg" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../components/PageHeader.vue";
 import Button from "../components/Button.vue";
 export default {
-  name: "home-view",
+  name: "capture-view",
   components: {
     PageHeader,
     Button,
   },
+  methods: {
+    beginCapture() {},
+  },
 };
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .page-container {
   height: 100%;
   width: 100%;

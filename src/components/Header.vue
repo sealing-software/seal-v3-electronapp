@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="header">
-      <img src="logo.svg" />
+      <img :src="require('@/assets/logo.svg')" />
       <h1>Software Extractor and Audit Logger</h1>
     </div>
     <div class="connect-status">

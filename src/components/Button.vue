@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container" @click="test">
     <div v-if="type == 'text'">{{ text }}</div>
     <div v-if="type == 'icon-text'">
-      <font-awesome-icon :icon="icon" />
+      <font-awesome-icon style="margin-right: 10px" :icon="icon" />
       {{ text }}
     </div>
     <div v-if="type == 'text-icon'">
       {{ text }}
-      <font-awesome-icon :icon="icon" />
+      <font-awesome-icon style="margin-left: 10px" :icon="icon" />
     </div>
     <div v-if="type == 'icon'">
       <font-awesome-icon :icon="icon" />
@@ -22,6 +22,13 @@ export default {
     type: String,
     text: String,
     icon: String,
+    ipcChannel: String,
+  },
+  methods: {
+    test() {
+      console.log("Method run");
+      window.ipcRenderer.send("req-reg", "test");
+    },
   },
 };
 </script>
