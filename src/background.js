@@ -7,6 +7,7 @@ import jetpack from "fs-jetpack";
 const isDevelopment = process.env.NODE_ENV !== "production";
 const { app, BrowserWindow, protocol, ipcMain } = electron;
 const path = require("path");
+const regedit = require("regedit");
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -108,14 +109,40 @@ ipcMain.on("req-reg", (e, item) => {
     );
   }
 
-  const regedit = require("regedit");
-
+  //Change vbs directory location for regedit module
   regedit.setExternalVBSLocation(vbsDirectory);
 
-  regedit.list(
-    ["HKCU\\SOFTWARE", "HKLM\\SOFTWARE", "HKCU\\IM_FAKE_THEREFOR_I_DONT_EXIST"],
-    function (err, result) {
-      console.log(result);
-    }
-  );
+  //Initial reg key for software pull, this will be replaced with config file read.
+  var regKey = "HKLM\\software\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+
+  const promisifiedRegedit = regedit.promisified;
+
+  promisifiedRegedit
+    .list(regKey)
+    .then((response) => {
+      return new Promise((resolve, reject) => {
+        //Get initial keys
+        let appList = response[regKey].keys;
+        //Dig deeper into each key and get information
+        var swList = [];
+        appList.forEach((appName) => {
+          let appKey = regKey + "\\" + appName;
+          promisifiedRegedit.list(appKey).then((response) => {
+            // console.log(response[appKey].values.DisplayName.value);
+            let responses = response[appKey].values;
+            // console.log(responses);
+            let swInfo = {
+              DisplayName: responses.DisplayName.value,
+              DIsplayVersion: responses.DisplayVersion.value,
+            };
+            swList.push(swInfo);
+          });
+        });
+        console.log("hello");
+        resolve(swList);
+      });
+    })
+    .then((response) => {
+      console.log(response);
+    });
 });
