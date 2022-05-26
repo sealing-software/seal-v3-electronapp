@@ -14,7 +14,7 @@ export default {
   name: "header-top",
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .header {
   display: flex;
   align-items: center;

@@ -93,56 +93,72 @@ if (isDevelopment) {
   }
 }
 
+var vbsDirectory;
+//Lazy implementation, need to investigate further on proper folder copy for serve and build
+//vbs folder contains scripts required for regedit module. CANNOT be compiled by electron.
+if (isDevelopment) {
+  jetpack.copy("./node_modules/regedit/vbs", app.getAppPath() + "/vbs", {
+    overwrite: true,
+  });
+  vbsDirectory = path.join(app.getAppPath(), "vbs");
+} else {
+  vbsDirectory = path.join(
+    process.resourcesPath,
+    "app/myfolder/subfolder/myscripts/myscript1.sh"
+  );
+}
+
+//Change vbs directory location for regedit module
+regedit.setExternalVBSLocation(vbsDirectory);
+const promisifiedRegedit = regedit.promisified;
+
 //Main conduct registry read when requested
 ipcMain.on("req-reg", (e, item) => {
-  var vbsDirectory;
-  //Lazy implementation, need to investigate further on proper folder copy for serve and build
-  if (isDevelopment) {
-    jetpack.copy("./node_modules/regedit/vbs", app.getAppPath() + "/vbs", {
-      overwrite: true,
-    });
-    vbsDirectory = path.join(app.getAppPath(), "vbs");
-  } else {
-    vbsDirectory = path.join(
-      process.resourcesPath,
-      "app/myfolder/subfolder/myscripts/myscript1.sh"
-    );
-  }
-
-  //Change vbs directory location for regedit module
-  regedit.setExternalVBSLocation(vbsDirectory);
-
   //Initial reg key for software pull, this will be replaced with config file read.
   var regKey = "HKLM\\software\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
 
-  const promisifiedRegedit = regedit.promisified;
-
-  promisifiedRegedit
-    .list(regKey)
-    .then((response) => {
-      return new Promise((resolve, reject) => {
-        //Get initial keys
-        let appList = response[regKey].keys;
-        //Dig deeper into each key and get information
-        var swList = [];
-        appList.forEach((appName) => {
-          let appKey = regKey + "\\" + appName;
-          promisifiedRegedit.list(appKey).then((response) => {
-            // console.log(response[appKey].values.DisplayName.value);
-            let responses = response[appKey].values;
-            // console.log(responses);
-            let swInfo = {
-              DisplayName: responses.DisplayName.value,
-              DIsplayVersion: responses.DisplayVersion.value,
-            };
-            swList.push(swInfo);
-          });
-        });
-        console.log("hello");
-        resolve(swList);
-      });
-    })
-    .then((response) => {
-      console.log(response);
-    });
+  //Gets list of software objects from top level registry key
+  regRequest(regKey);
 });
+
+//Finds values from keys and returns object
+async function regRequest(topLevel) {
+  promisifiedRegedit.list(topLevel).then((response) => {
+    //Get array initial keys
+    let appList = response[topLevel].keys;
+    //Gets full registery location string
+    const fullLoc = appList.map((key) => {
+      let fullKey = topLevel + "\\" + key;
+      return fullKey;
+    });
+
+    let softwareInfo = [];
+
+    let promiseArray = fullLoc.map((fullKey) => {
+      return new Promise(function (resolve, reject) {
+        promisifiedRegedit
+          .list(fullKey)
+          .then((response) => {
+            let values = response[fullKey].values;
+            //console.log(values);
+            //Create new software item object and apply relevant data.
+            softwareInfo.push({
+              //Utilize optional chaining operator eventually
+              displayName: values.DisplayName.value,
+              displayVersion: values.DisplayVersion.value,
+              publisher: values.Publisher.value,
+            });
+            resolve();
+          })
+          .catch((e) => {
+            reject();
+          });
+      });
+    });
+
+    //Some promises will fail within promises array. Need to evaluate a response for this.
+    Promise.allSettled(promiseArray).then(() => {
+      console.log(softwareInfo);
+    });
+  });
+}
