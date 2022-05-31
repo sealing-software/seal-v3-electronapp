@@ -1,14 +1,19 @@
 <template>
-  <div class="container">
+  <div class="btn-container">
     <div
-      :class="[navBtn.name == currentPage ? 'selected' : '', 'button']"
+      :class="[
+        navBtn.name == currentPage ? 'selected' : '',
+        'button',
+        'd-flex',
+        'align-items-center',
+      ]"
       @mouseenter="expandButton"
       @mouseleave="closeButton"
       @click="$emit('page-change', navBtn.name)"
     >
       <div class="content">
         <!-- implicit style (fas is assumed) -->
-        <div class="icon">
+        <div class="icon d-flex justify-content-center align-items-center">
           <font-awesome-icon :icon="navBtn.icon" />
         </div>
         <div class="btn-name">{{ navBtn.name }}</div>
@@ -42,15 +47,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.btn-container {
   position: relative;
-  margin: 20px 5px;
+  margin: 20px 10px;
   z-index: 10;
 
   .button {
-    display: flex;
-    align-items: center;
-    margin: auto;
+    //display: flex;
+    //align-items: center;
     //justify-content: center;
     background: #017cff;
     border-radius: 30px;
@@ -79,6 +83,7 @@ export default {
 
       .icon {
         width: 50px;
+        padding-right: 3px;
       }
 
       .btn-name {

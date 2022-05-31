@@ -14,9 +14,6 @@
   </div>
 
   <table id="tableComponent" class="table table-bordered table-striped">
-    <caption>
-      A Responsive, Accessible Table Component
-    </caption>
     <thead>
       <tr>
         <!-- loop through each value of the fields to get the table header -->
@@ -84,5 +81,6 @@ export default {
 <style scoped>
 table th:hover {
   background: #f2f2f2;
+  cursor: pointer;
 }
 </style>

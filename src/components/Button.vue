@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="test">
+  <div class="btn-container" @click="test">
     <div v-if="type == 'text'">{{ text }}</div>
     <div v-if="type == 'icon-text'">
       <font-awesome-icon style="margin-right: 10px" :icon="icon" />
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
+.btn-container {
   display: inline-block;
   background: #34c759;
   border: 2px #34c759 solid;
@@ -45,6 +45,7 @@ export default {
   cursor: pointer;
   transition: all 0.1s ease-out 0s;
   z-index: 1;
+  width: auto;
 
   &:hover {
     background: white;

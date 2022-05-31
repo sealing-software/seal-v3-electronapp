@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="d-flex justify-content-center">
     <div :key="navBtn.name" v-for="navBtn in navBtns">
       <NavButton
         :navBtn="navBtn"
@@ -24,12 +24,9 @@ export default {
 </script>
 <style scoped>
 nav {
-  display: flex;
   flex-direction: column;
   width: 70px;
   height: 100%;
-  justify-content: center;
-  align-content: center;
   z-index: 9;
 }
 </style>
