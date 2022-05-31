@@ -20,7 +20,7 @@ export default {
   align-items: center;
 }
 img {
-  width: 50px;
+  width: 60px;
   margin: 0px 5px;
 }
 

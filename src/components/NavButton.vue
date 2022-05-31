@@ -41,11 +41,10 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   position: relative;
-  margin: 20px 0px;
-  margin-left: 5px;
+  margin: 20px 5px;
   z-index: 10;
 
   .button {

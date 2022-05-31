@@ -26,7 +26,7 @@ export default {
 nav {
   display: flex;
   flex-direction: column;
-  width: 60px;
+  width: 70px;
   height: 100%;
   justify-content: center;
   align-content: center;
