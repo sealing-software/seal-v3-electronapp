@@ -119,6 +119,16 @@ ipcMain.on("req-reg", (e, item) => {
 
   //Gets list of software objects from top level registry key
   regRequest(regKey);
+
+  var wmi = require("node-wmi");
+  wmi.Query(
+    {
+      class: "Win32_BIOS",
+    },
+    function (err, bios) {
+      console.log(bios);
+    }
+  );
 });
 
 //Finds values from keys and returns object
