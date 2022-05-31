@@ -1,6 +1,6 @@
 {
-  "name": "seal",
-  "version": "0.1.0",
+  "name": "SEAL",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -13,9 +13,18 @@
   },
   "main": "background.js",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "core-js": "^3.8.3",
     "electron": "^18.2.3",
-    "vue": "^3.2.13"
+    "fs-jetpack": "^4.3.1",
+    "node-wmi": "^0.0.5",
+    "regedit": "^5.1.1",
+    "stream": "^0.0.2",
+    "vue": "^3.2.13",
+    "vue-mq": "^1.0.1",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -25,8 +34,10 @@
     "@vue/cli-service": "~5.0.0",
     "electron": "^13.0.0",
     "electron-devtools-installer": "^3.1.0",
-    "eslint": "^7.32.0",
+    "eslint": "7.5",
     "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.51.0",
+    "sass-loader": "^13.0.0",
     "vue-cli-plugin-electron-builder": "~2.1.1"
   },
   "eslintConfig": {
