@@ -26,6 +26,7 @@ img {
 
 h1 {
   margin-left: 10px;
+  font-weight: 600;
 }
 
 .header-container {

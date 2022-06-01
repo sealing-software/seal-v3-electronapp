@@ -25,6 +25,8 @@
     "regedit": "^5.1.1",
     "stream": "^0.0.2",
     "vue": "^3.2.13",
+    "vue-columns-resizable": "^0.0.1",
+    "vue-easytable": "^2.17.2",
     "vue-mq": "^1.0.1",
     "vue-router": "^4.0.15"
   },
